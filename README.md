@@ -1,8 +1,8 @@
-#Propose
+# Propose
 
 extracting pdf title
 
-#Installation
+# Installation
 
 clone project and run
 
@@ -11,10 +11,9 @@ python setup.py develop
 ```
 **notice**: maybe need permissions
 
-#Usage
+# Usage
 
 ```shell
 vnpdftitle -d tmp --rename <your-pdf-file>
 ```
-e.g: `vnpdftitle test/test.pdf`
 
