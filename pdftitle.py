@@ -318,7 +318,6 @@ def path_leaf(path):
     return tail or os.path.basename(head)
 
 def main():
-    pass
     opts, args = getopt.getopt(sys.argv[1:], 'nd:', ['dry-run', 'rename'])
 
     dry_run = False
