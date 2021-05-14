@@ -14,7 +14,7 @@ python setup.py develop
 #Usage
 
 ```shell
-vnpdftitle <your-pdf-file>
+vnpdftitle -d tmp --rename <your-pdf-file>
 ```
 e.g: `vnpdftitle test/test.pdf`
 
