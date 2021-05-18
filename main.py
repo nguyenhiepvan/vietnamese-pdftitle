@@ -20,7 +20,7 @@ from pdfminer.pdfinterp import PDFResourceManager, PDFPageInterpreter
 from pdfminer.converter import PDFPageAggregator
 from pdfminer.layout import LAParams, LTChar, LTText, LTFigure, LTTextBox, LTTextLine
 from operator import itemgetter
-
+import json
 
 def make_parsing_state(*sequential, **named):
     enums = dict(zip(sequential, range(len(sequential))), **named)
@@ -37,6 +37,8 @@ MIN_CHARS = 6
 MAX_WORDS = 20
 MIN_LONGEST_WORD = 4
 
+f = open('unexpected_keywords.json')
+UNEXPECTED_KEYWORDS = json.load(f)
 def max_word_length(text):
     return max(len(w) for w in text.split(' '))
 
@@ -78,6 +80,8 @@ def junk_line(line):
     too_small = len(line.strip()) < MIN_CHARS
     has_no_words = bool(re.search(r'^[0-9 \t-]+$|^(\(cid:[0-9 \t-]*\))+|^(abstract|unknown|title|untitled):?$', line.strip().lower()))
     is_copyright_info = bool(re.search(r'technical\s+report|proceedings|preprint|to\s+appear|submission|(integrated|international).*conference|transactions\s+on|symposium\s+on|downloaded\s+from\s+http', line.lower()))
+
+    include_unexpected_keyword = any(unexpected_keyword in line.lower() for unexpected_keyword in UNEXPECTED_KEYWORDS)
     return too_small or has_no_words or is_copyright_info
 
 def empty_str(s):
@@ -85,7 +89,7 @@ def empty_str(s):
 
 def update_largest_text(line, size, largest_text):
     line = line.replace('\r', '').replace('\n', '')
-    size = round(size,2)
+    # size = round(size,2)
     log("===================================")
     log('text :' + line)
     log('update size :' + str(size))
