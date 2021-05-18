@@ -9,6 +9,7 @@ Usage:
 
 from io import StringIO
 import getopt, os, re, string, sys, glob, unidecode
+import os 
 
 from PyPDF2 import PdfFileReader
 from PyPDF2.utils import PdfReadError
@@ -22,6 +23,7 @@ from pdfminer.layout import LAParams, LTChar, LTText, LTFigure, LTTextBox, LTTex
 from operator import itemgetter
 import json
 
+
 def make_parsing_state(*sequential, **named):
     enums = dict(zip(sequential, range(len(sequential))), **named)
     return type('ParsingState', (), enums)
@@ -30,6 +32,7 @@ def log(text):
     if IS_LOG_ON:
         print ('-------- ' + text)
 
+dir_path = os.path.dirname(os.path.realpath(__file__))
 CHAR_PARSING_STATE = make_parsing_state('INIT_X', 'INIT_D', 'INSIDE_WORD')
 IS_LOG_ON = False
 ONE_CLICK_MODE = True
@@ -37,7 +40,7 @@ MIN_CHARS = 6
 MAX_WORDS = 20
 MIN_LONGEST_WORD = 4
 
-f = open('unexpected_keywords.json')
+f = open(dir_path + '/unexpected_keywords.json')
 UNEXPECTED_KEYWORDS = json.load(f)
 def max_word_length(text):
     return max(len(w) for w in text.split(' '))
@@ -89,7 +92,7 @@ def empty_str(s):
 
 def update_largest_text(line, size, largest_text):
     line = line.replace('\r', '').replace('\n', '')
-    # size = round(size,2)
+    size = round(size,2)
     log("===================================")
     log('text :' + line)
     log('update size :' + str(size))
