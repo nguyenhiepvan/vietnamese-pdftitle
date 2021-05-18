@@ -42,6 +42,7 @@ MIN_LONGEST_WORD = 4
 
 f = open(dir_path + '/unexpected_keywords.json')
 UNEXPECTED_KEYWORDS = json.load(f)
+
 def max_word_length(text):
     return max(len(w) for w in text.split(' '))
 
@@ -85,13 +86,13 @@ def junk_line(line):
     is_copyright_info = bool(re.search(r'technical\s+report|proceedings|preprint|to\s+appear|submission|(integrated|international).*conference|transactions\s+on|symposium\s+on|downloaded\s+from\s+http', line.lower()))
 
     include_unexpected_keyword = any(unexpected_keyword in line.lower() for unexpected_keyword in UNEXPECTED_KEYWORDS)
-    return too_small or has_no_words or is_copyright_info
+    return too_small or has_no_words or is_copyright_info or include_unexpected_keyword
 
 def empty_str(s):
     return len(s.strip()) == 0
 
 def update_largest_text(line, size, largest_text):
-    line = line.replace('\r', '').replace('\n', '')
+    line = line.replace('\r', ' ').replace('\n', ' ')
     size = round(size,2)
     log("===================================")
     log('text :' + line)
