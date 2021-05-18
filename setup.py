@@ -17,11 +17,11 @@ setuptools.setup(
     ],
     include_package_data=True,
     install_requires=[
-        "PyPDF2"
+        "PyPDF2","unidecode","ftfy"
     ],
     entry_points={
         'console_scripts': [
-            'vnpdftitle = pdftitle:main',
+            'vnpdftitle = main:main',
         ],
     }
 )
