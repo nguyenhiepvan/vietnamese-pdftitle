@@ -3,6 +3,7 @@ import setuptools
 setuptools.setup(
     name="vietnamese-pdf-title",
     version="1.0.0",
+    python_requires='>3.7',
     description="extracting vietnamese title from pdf",
     long_description_content_type="text/markdown",
     url="https://github.com/nguyenhiepvan/vietnamese-pdftitle",
@@ -17,7 +18,7 @@ setuptools.setup(
     ],
     include_package_data=True,
     install_requires=[
-        "PyPDF2","unidecode","ftfy"
+        "PyPDF2","unidecode","ftfy","pdfminer"
     ],
     entry_points={
         'console_scripts': [
