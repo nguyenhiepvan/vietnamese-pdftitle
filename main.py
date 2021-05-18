@@ -9,7 +9,6 @@ Usage:
 
 from io import StringIO
 import getopt, os, re, string, sys, glob, unidecode
-import os 
 
 from PyPDF2 import PdfFileReader
 from PyPDF2.utils import PdfReadError
