@@ -21,7 +21,7 @@ setuptools.setup(
     ],
     entry_points={
         'console_scripts': [
-            'vnpdftitle = main:main',
+            'vnpdftitle = vnpdftitle:main',
         ],
     }
 )
